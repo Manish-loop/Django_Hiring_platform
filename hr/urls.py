@@ -3,6 +3,7 @@ from hr import views
 
 
 urlpatterns = [
-    path('hrdash/', views.hrHome),
-    path('post-job',views.post_job,name='post_job')
+    path('hrdash/', views.hrHome_views,name="hr_dash"),
+    path('post-job/',views.post_job_views,name='post_job'),
+    path('candidate-details/<int:pk>/',views.candidate_view,name='candidate_details')
 ]

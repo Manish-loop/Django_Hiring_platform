@@ -20,7 +20,7 @@ class JobPost(models.Model):
         return str(self.title)
     
 STATUS_CHOICE = (
-    ('pandding','pandding'),
+    ('pending','pending'),
     ('selected','selected')
 )    
 
@@ -30,7 +30,7 @@ class CandidateApplication(models.Model):
     passingYear = models.IntegerField()
     yearOfExp = models.IntegerField(default=0)
     resume = models.FileField(upload_to='resume')
-    status = models.CharField(choices=STATUS_CHOICE,max_length=20,default='pandding')
+    status = models.CharField(choices=STATUS_CHOICE,max_length=20,default='pending')
     
 
 class SelectCandidateJob(models.Model):

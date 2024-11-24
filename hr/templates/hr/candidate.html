@@ -222,6 +222,7 @@
 <body>
     <div class="container">
         {% include 'hr/navbar.html' %}
+
         <div class="content">
             <h2>Candidates Details</h2>
             {% if jobapplys %}
@@ -293,8 +294,7 @@
                             <td>{{candi.candidate.yearOfExperience}}</td>
                             <td><a href="{{candi.candidate.resume.url}}" class="resume-download">Download Resume</a></td>
                             <td>{{candi.candidate.status}}</td>
-                             
-                             
+    
                         </tr>
                         {% endfor %}
                         <!-- Add more rows for other candidates -->
@@ -304,7 +304,7 @@
                     <h2>No Application received</h2>
                 {% endif %}
                 
-             
+    
         </div>
 
         
