@@ -114,7 +114,7 @@
   <div class="container">
     
     {% include 'hr/navbar.html' %} 
- 
+
 
     <div class="content">
       <h2>Welcome to Your Dashboard</h2>
@@ -122,8 +122,12 @@
 
 
       <div class="job-cards">
-
-      {% for job in jobposts %}
+      {% if jobpost %}
+      
+      
+      {% endif %}
+      
+      {% for job in jobpost %}
         <div class="job-card">
           <h3>{{job.title}}</h3>
           <p>Posted on: {{job.lastDateToApply}}</p>
@@ -133,8 +137,11 @@
           </div>
           <button class="details-button"><a href="{% url 'candidatedetails' job.id %}" style="text-decoration: none; color: inherit;">See Details</a></button>
         </div>
-        {% endfor %} 
 
+        {% endfor %} 
+        {% else %}
+          <h1>No Post</h1>
+        {% endif %}
       
       </div>
       

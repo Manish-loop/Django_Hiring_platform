@@ -4,8 +4,8 @@ from hr.models import CandidateApplication, JobPost
 # Create your models here.
 
 class MyApplyJobList(models.Model):
-    user = models.OneToOneField(to=User,on_delete=models.CASCADE)
-    job = models.ForeignKey(to=CandidateApplication,on_delete=models.CASCADE)
+    user = models.ForeignKey(to=User,on_delete=models.CASCADE)
+    job = models.OneToOneField(to=CandidateApplication,on_delete=models.CASCADE)
     dateYouApply = models.DateField(auto_now_add=True)
     
     

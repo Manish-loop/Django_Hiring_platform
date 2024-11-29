@@ -1,13 +1,16 @@
-from django.shortcuts import render
-from hr.models import JobPost, CandidateApplication, SelectCandidateJob
+from django.shortcuts import render, redirect
+from hr.models import Hr, JobPost, CandidateApplication, SelectCandidateJob
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 @login_required
 def hrHome_views(request):
-    
-    return render(request, 'hr/hrdashboard.html',{'jobs':jobs})
+    if Hr.objects.filter(user=request.user).exists():
+        jobpost = JobPost.objects.filter(user=request.user)
+        print(jobpost)
+        return render(request, 'hr/hrdashboard.html',{'jobpost':jobpost})
+    return redirect('candidate_dashboard')
 
 # def hrHome(request):
 #     # Fetch job posts to display on the dashboard
@@ -21,7 +24,7 @@ def hrHome_views(request):
 def post_job_views(request):
     msg = None
     if request.method == 'POST':
-        job_title = request.POst.get('job-title')
+        job_title = request.POST.get('job-title')
         address = request.POST.get('address')
         company_name = request.POST.get('company-name')
         salary_low = request.POST.get('salary-low')
@@ -35,5 +38,11 @@ def post_job_views(request):
 
 @login_required
 def candidate_view(request,pk):
-    print(pk)
-    return render(request, 'hr/candidate.html')
+    if JobPost.objects.filter(id=pk).exists():
+        job = JobPost.objects.get(id=pk)
+        
+        applications = CandidateApplication.objects.filter(job=job) 
+        selectedapplication = SelectCandidateJob.objects.filter(job=job)
+        return render(request, 'hr/candidate.html',{'applications':applications,'selectedapplication':selectedapplication}) 
+    return redirect('hr_dash')    
+    

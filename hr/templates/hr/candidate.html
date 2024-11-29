@@ -225,7 +225,7 @@
 
         <div class="content">
             <h2>Candidates Details</h2>
-            {% if jobapplys %}
+            {% if applications %}
             <table class="candidates-table">
                 <thead>
                     <tr>
@@ -240,18 +240,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for candi in jobapplys %}
+                    {% for candidate in applications %}
                     <tr>
-                        <td>{{candi.user.username}}</td>
-                        <td>{{candi.user.email}}</td>
-                        <td>{{candi.passingYear}}</td>
-                        <td>{{candi.yearOfExperience}}</td>
-                        <td><a href="{{candi.resume.url}}" class="resume-download">Download Resume</a></td>
+                        <td>{{candidate.user.username}}</td>
+                        <td>{{candidate.user.email}}</td>
+                        <td>{{candidate.passingYear}}</td>
+                        <td>{{candidate.yearOfExp}}</td>
+                        <td><a href="{{candidate.resume.url}}" class="resume-download">Download Resume</a></td>
                         <td>Pending</td>
                         <td>
                             <form action="{% url 'acceptapplication' %}" method="post">
                                 {% csrf_token %}
-                                <input type="number" name="candidateid" value="{{candi.id}}" hidden>
+                                <input type="number" name="candidateid" value="{{candidate.id}}" hidden>
                                 <input type="number" name="jobpostid" value="{{jobpost.id}}" hidden>
                                 <button class="accept-button" type="submit">Accept</button>
                             </form>
@@ -268,10 +268,8 @@
                     <!-- Add more rows for other candidates -->
                 </tbody>
             </table>
-            {% else %}
-                <h2>No Application received</h2>
-            {% endif %}
-             
+            
+
                 <h2>Selected Candidates Details</h2>
                 {% if jobapplys %}
                 <table class="candidates-table">
@@ -286,27 +284,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for candi in selectedCandidate %}
+                        {% for selectcandi in selectedapplication %}
                         <tr>
-                            <td>{{candi.candidate.user.username}}</td>
-                            <td>{{candi.candidate.user.email}}</td>
-                            <td>{{candi.candidate.passingYear}}</td>
-                            <td>{{candi.candidate.yearOfExperience}}</td>
-                            <td><a href="{{candi.candidate.resume.url}}" class="resume-download">Download Resume</a></td>
-                            <td>{{candi.candidate.status}}</td>
+                            <td>{{selectcandi.candidate.user.username}}</td>
+                            <td>{{selectcandi.candidate.user.email}}</td>
+                            <td>{{selectcandi.candidate.passingYear}}</td>
+                            <td>{{selectcandi.candidate.yearOfExperience}}</td>
+                            <td><a href="{{selectcandi.candidate.resume.url}}" class="resume-download">Download Resume</a></td>
+                            <td>{{selectcandi.candidate.status}}</td>
     
                         </tr>
                         {% endfor %}
                         <!-- Add more rows for other candidates -->
                     </tbody>
                 </table>
-                {% else %}
-                    <h2>No Application received</h2>
-                {% endif %}
+                
                 
     
         </div>
-
+        {% else %}
+            <h2>No Candidate applications submit till now</h2>
+        {% endif %}
         
 
     </div>

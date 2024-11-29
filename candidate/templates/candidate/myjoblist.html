@@ -235,11 +235,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for candi in joblist %}
+                    {% for myjob in joblist %}
                     <tr>
-                        <td>{{candi.job.job.compnayName}}</td>
-                        <td>{{candi.job.job.title}}</td>
-                        <td>{{candi.job.status}}</td>
+                        <td>{{myjob.job.job.compnayName}}</td>
+                        <td>{{myjob.job.job.title}}</td>
+                        <td>{{myjob.job.status}}</td>
         
                     </tr>
                     {% endfor %}
